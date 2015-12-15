@@ -1,7 +1,8 @@
 """SimpleRule.py"""
 from pyspark import SparkContext
 import os
-
+import sys
+import 
 
 def simpleRule(dataPoint):
 	global canbuy
@@ -39,6 +40,9 @@ for filename in os.listdir('/Users/akshaankakar/Desktop/Big_Data_Analytics/Final
 		high = rddValues.reduce(lambda a, b: a if (a>b) else b)
 		mean = rddValues.mean()
 		stdev = rddValues.stdev()
+
+		t_buy = [0,0,0,0,0]
+		t_sell = [sys.maxsize,sys.maxsize,sys.maxsize,sys.maxsize,sys.maxsize]
 
 		t_buy = max(mean - stdev, low)
 		t_sell = min(mean + stdev, high)

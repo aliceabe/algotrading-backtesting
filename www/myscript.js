@@ -46,12 +46,14 @@ function viewGroup(code, name) {
             type: 'area'
         },
         xAxis: {
-            type: 'datetime'
+            type: 'datetime',
         },
         legend: {
             enabled: false
         },
-        series: [{data: [], color: 'rgba(233,30,0,0.5)'}, {data: [], color: 'rgba(55,233,41,0.5)'}]
+        series: [{data: [], color: 'rgba(233,30,0,0.5)'}, {data: [], color: 'rgba(55,233,41,0.5)'}],
+	title : { 
+	    text: "Bollinger Band Strategy Returns"}
     };
 
     $.getJSON('http://localhost:8080/json/profits/' + code + '.json', function (data) {
