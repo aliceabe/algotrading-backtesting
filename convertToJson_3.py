@@ -10,7 +10,7 @@ for filename in os.listdir('quantquote_daily_sp500_83986/profits_2'):
 
 		result = {'pos': [], 'neg': []}
 		
-		with open('quantquote_daily_sp500_83986/profits/' + filename , 'rb') as csvfile:
+		with open('quantquote_daily_sp500_83986/profits_2/' + filename , 'rb') as csvfile:
 			reader = csv.reader(csvfile, delimiter=',')
 			for row in reader:
 				ts = int(time.mktime(time.strptime(row[0], '%Y%m%d'))) * 1000

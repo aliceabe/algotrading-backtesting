@@ -17,7 +17,7 @@ function viewGroup(code, name) {
             series : [{
                 name : name + ' Stock Price',
                 data : data,
-                type : 'area',
+		type: 'area',                
                 threshold : null,
                 tooltip : {
                     valueDecimals : 2
@@ -34,7 +34,10 @@ function viewGroup(code, name) {
                         [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
                     ]
                 }
-            }]
+            },
+	],
+
+
         });
     });
 
@@ -54,7 +57,7 @@ function viewGroup(code, name) {
         },
         series: [{data: [], color: 'rgba(233,30,0,0.5)'}, {data: [], color: 'rgba(55,233,41,0.5)'}],
 	title : { 
-	    text: "Bollinger Band Strategy (50-day MA +/- 2&sigma;) Returns",
+	    text: "Mean Reversion Strategy with Bollinger Bands (50-day MA +/- 2&sigma;)",
 	    useHTML: true
 	},
 	yAxis: {
