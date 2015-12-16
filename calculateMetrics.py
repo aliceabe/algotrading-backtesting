@@ -27,7 +27,8 @@ for filename in os.listdir('/Users/akshaankakar/Desktop/Big_Data_Analytics/Final
 	dict["Std"] = std
 	dict["Max Drawdown"] = max_drawdown
 	dict["Sharpe Ratio"] = sharpe
-	
-	with open('/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/json/metrics/' + filename, 'w') as outfile:
+
+	code = filename.split(".")[0]	
+	with open('/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/json/metrics/' + code.upper() + ".csv", 'w') as outfile:
 		json.dump(dict,outfile)
 
