@@ -47,13 +47,19 @@ function viewGroup(code, name) {
         },
         xAxis: {
             type: 'datetime',
+	    title: {text: "Time"}
         },
         legend: {
             enabled: false
         },
         series: [{data: [], color: 'rgba(233,30,0,0.5)'}, {data: [], color: 'rgba(55,233,41,0.5)'}],
 	title : { 
-	    text: "Bollinger Band Strategy Returns"}
+	    text: "Bollinger Band Strategy (50-day MA +/- 2&sigma;) Returns",
+	    useHTML: true
+	},
+	yAxis: {
+	    title : { text: "Returns"}
+	}
     };
 
     $.getJSON('http://localhost:8080/json/profits/' + code + '.json', function (data) {
