@@ -71,6 +71,34 @@ function viewGroup(code, name) {
         var chart = new Highcharts.Chart(options);
     });
 
+    // Create the chart 3
+    var options2 = {
+        chart: {
+            renderTo: 'container3',
+            type: 'area'
+        },
+        xAxis: {
+            type: 'datetime',
+            title: {text: "Time"}
+        },
+        legend: {
+            enabled: false
+        },
+        series: [{data: [], color: 'rgba(233,30,0,0.5)'}, {data: [], color: 'rgba(55,233,41,0.5)'}],
+        title : {
+            text: "Momentum Trading Strategy" 
+        },
+        yAxis: {
+            title : { text: "Returns"}
+        }
+    };
+
+    $.getJSON('http://localhost:8080/json/profits_2/' + code + '.json', function (data) {
+        options2.series[0].data = data['neg'];
+        options2.series[1].data = data['pos'];
+        var chart = new Highcharts.Chart(options2);
+    });
+
 }
 
 $(document).ready(function() {
