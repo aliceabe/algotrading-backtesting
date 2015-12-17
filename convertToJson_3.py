@@ -16,11 +16,11 @@ for filename in os.listdir('quantquote_daily_sp500_83986/profits_2'):
 				ts = int(time.mktime(time.strptime(row[0], '%Y%m%d'))) * 1000
 				val = float(row[1])
 				if val > 0:
-					result['pos'].append([ts, round(val, 2)])
+					result['pos'].append([ts, round(val)])
 					result['neg'].append([ts, 0])
 				else:
 					result['pos'].append([ts, 0])
-					result['neg'].append([ts, round(val, 2)])
+					result['neg'].append([ts, round(val)])
 
 		with open('json/profits_2/' + code.upper() + '.json', 'wb') as f:
 			json.dump(result, f)
