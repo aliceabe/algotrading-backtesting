@@ -3,10 +3,10 @@ import csv
 import json
 import math
 
-for filename in os.listdir('/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/quantquote_daily_sp500_83986/profits'):
+for filename in os.listdir('/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/quantquote_daily_sp500_83986/profits_2'):
 	returns = []
 	print filename
-	with open("/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/quantquote_daily_sp500_83986/profits/" + filename, "r") as myfile:	
+	with open("/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/quantquote_daily_sp500_83986/profits_2/" + filename, "r") as myfile:	
 		reader = csv.reader(myfile)
 		for row in reader:
 			returns.append(float(row[1]))		
@@ -32,6 +32,6 @@ for filename in os.listdir('/Users/akshaankakar/Desktop/Big_Data_Analytics/Final
 	dict["Sharpe Ratio"] = sharpe
 
 	code = filename.split(".")[0]	
-	with open('/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/json/metrics/' + code.upper() + ".csv", 'w') as outfile:
+	with open('/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/json/metrics_2/' + code.upper() + ".csv", 'w') as outfile:
 		json.dump(dict,outfile)
 
