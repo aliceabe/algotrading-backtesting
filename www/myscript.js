@@ -42,7 +42,7 @@ function viewGroup(code, name) {
     });
 
 
-    // Create the chart 2    
+    // Create the chart 2
     var options = {
         chart: {
             renderTo: 'container2',
@@ -98,6 +98,14 @@ function viewGroup(code, name) {
         options2.series[1].data = data['pos'];
         var chart = new Highcharts.Chart(options2);
     });
+
+    // Fill in the metric div
+    $.getJSON('http://localhost:8080/json/metrics/' + code + '.json', function (data) {
+        $('#container2bis').html("<h3><b>Mean: </b><br/>" + data['Mean'] + "</h3><h3><b>Std Dev: </b><br/>" + data['Std'] + "</h3><h3><b>Max Drawdown: </b><br/>" + data['Max Drawdown'] + "</h3><h3><b>Sharpe Ratio: </b><br/>" + data['Sharpe Ratio'] + "</h3>")
+    })
+    $.getJSON('http://localhost:8080/json/metrics_2/' + code + '.json', function (data) {
+        $('#container3bis').html("<h3><b>Mean: </b><br/>" + data['Mean'] + "</h3><h3><b>Std Dev: </b><br/>" + data['Std'] + "</h3><h3><b>Max Drawdown: </b><br/>" + data['Max Drawdown'] + "</h3><h3><b>Sharpe Ratio: </b><br/>" + data['Sharpe Ratio'] + "</h3>")
+    })
 
 }
 

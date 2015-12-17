@@ -2,6 +2,9 @@
 from pyspark import SparkContext
 import os
 
+#path = '/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/'
+path = '/home/alice/Documents/algotrading-backtesting/'
+
 def simpleRule(dataPoint):
 	global canbuy
 	global nbshares
@@ -21,12 +24,12 @@ def simpleRule(dataPoint):
 		canbuy = True
 		decreasing = True
 	current = capital + nbshares * dataPoint[1] - 1000
-	with open("/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/quantquote_daily_sp500_83986/profits_2/" + code + ".csv", "a") as myfile:
+	with open(path + "quantquote_daily_sp500_83986/profits_2/" + code + ".csv", "a") as myfile:
 		myfile.write(dataPoint[0] + ',' + str(current) + '\n')
 	last = dataPoint[1]
 
 sc = SparkContext("local", "SimpleRule")
-for filename in os.listdir('/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/quantquote_daily_sp500_83986/quotes'):
+for filename in os.listdir(path + 'quantquote_daily_sp500_83986/quotes'):
 
 	try:
 		window_length = 50
@@ -41,7 +44,7 @@ for filename in os.listdir('/Users/akshaankakar/Desktop/Big_Data_Analytics/Final
 		last = 0	
 		decreasing = True
 
-		quoteFile = "/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/quantquote_daily_sp500_83986/quotes/" + filename
+		quoteFile = path + "quantquote_daily_sp500_83986/quotes/" + filename
 		quoteData = sc.textFile(quoteFile).cache()
 
 		rdd = quoteData.map(lambda line: line.split(',')).map(lambda x: (x[0], (float(x[2])+float(x[5]))/2))

@@ -3,10 +3,10 @@ import csv
 import json
 import math
 
-for filename in os.listdir('/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/quantquote_daily_sp500_83986/profits_2'):
+for filename in os.listdir('quantquote_daily_sp500_83986/profits_2'):
 	returns = []
 	print filename
-	with open("/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/quantquote_daily_sp500_83986/profits_2/" + filename, "r") as myfile:	
+	with open("quantquote_daily_sp500_83986/profits_2/" + filename, "r") as myfile:	
 		reader = csv.reader(myfile)
 		for row in reader:
 			returns.append(float(row[1]))		
@@ -26,12 +26,12 @@ for filename in os.listdir('/Users/akshaankakar/Desktop/Big_Data_Analytics/Final
 		std_excess = sum(std_excess)/len(sharpe)
 		sharpe = mean_excess/std_excess
 	dict = {}
-	dict["Mean"] = mean
-	dict["Std"] = std
-	dict["Max Drawdown"] = max_drawdown
-	dict["Sharpe Ratio"] = sharpe
+	dict["Mean"] = "%.2f" % mean
+	dict["Std"] = "%.2f" % std
+	dict["Max Drawdown"] = "%.2f" % max_drawdown
+	dict["Sharpe Ratio"] = "%.2f" % sharpe
 
 	code = filename.split(".")[0]	
-	with open('/Users/akshaankakar/Desktop/Big_Data_Analytics/Final/json/metrics_2/' + code.upper() + ".csv", 'w') as outfile:
+	with open('json/metrics_2/' + code.upper() + ".json", 'w') as outfile:
 		json.dump(dict,outfile)
 
