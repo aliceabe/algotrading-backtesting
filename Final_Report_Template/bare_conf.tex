@@ -443,13 +443,10 @@ There is an abundance of well developed and well maintained tools which have bee
 % (should never be an issue)
 
 \section{Related Works}
-
-Since the advent of algorithmic trading, a variety of trading platforms have been developed. These platforms offer a wide variety of backtesting capabilities
-
----------TODO!----------
+We modeled our implementation of the backtesting engine with some other tools and works in mind. One of the prominent platforms that we sought to emulate is Quantopian (CITE). The Quantopian platform allows in-browser implementation of trading algorithms in Python. It also allows the use of internal APIs as well as most external python modules for statistics, numerical algorithms etc. Although we have not extended our system to allow in-browser coding, we have also used python as the language of choice for trading algorithm implementation. Python is readable, flexible and popular, making it a good choice for algorithmic trading; a field where not everyone is well versed with computer programming. We also sought to emulate the charting and metric calculations performed by the Quantopian platform. The benchmark as well as the returns time series are plotted to provide a lucid understanding of the algorithm performance, without confusing the user with unnecessary detail. Also, important metrics such as the Sharpe Ratio, Maximum drawdown etc. are provided to the user for further insight.
 
 \section{System Overview}
-the main objectives in our implementation were to keep the platform efficient and easily extensible. In order to achieve these goals, we partitioned the system into independently functioning subsystems which we then integrated to realize the final backtesting engine. For the purpose of demonstration, we utilized the free historical pricing data from QuantCode (CITE). The dataset as well as the subsystems are described in detail in the following subsections.
+The main objectives in our implementation were to keep the platform efficient and easily extensible. In order to achieve these goals, we partitioned the system into independently functioning subsystems which we then integrated to realize the final backtesting engine. For the purpose of demonstration, we utilized the free historical pricing data from QuantCode (CITE). The dataset as well as the subsystems are described in detail in the following subsections.
 
 \subsection{QuantQuote dataset}
 We decided to use the QuantQuote free historical stock price data for the purpose of demonstration. This data consists of daily stock tick data for the 500 symbols that are listed on the Standard and Poor's 500 Index from 1998 to present. Although we used the dataset throughout the design and testing process, we structured the backtesting engine such that it is dataset agnostic. More specifically, we designed our subsystems so that they do not impose any tight constraints on input data formatting. Further descriptions of input data specifications are provided in the following subsection.
@@ -468,7 +465,15 @@ Within each file, the time series were stored in a comma separated value (CSV) f
 
 Apache Spark is a tool that was developed for processing general large-scale data efficiently (CITE). Spark come with support for multiple languages and platforms and an also integrate seamlessly with the Hadoop Distributed File System. We chose Spark to be the workhorse for the main trading algorithm processing. In order to leverage the features offered by Spark, we used pySpark, which is the Spark API in the Python scripting language. Our algorithm processing engine is responsible for detecting all the trading symbols that are involved in a user-defined trading strategy, and to retrieve the corresponding data from the Hadoop data store. After retrieving the required time series, the engine then runs the rules specified in the strategy against these series and computes the basic returns for the overall portfolio. Once the returns have been computed for the entire data, further portfolio performance metrics are computed. These include the mean return, standard deviation, maximum drawdown and Sharpe Ratio. The final returns time series and the metrics are then written to temporary output files on disk for use further downstream in the processing pipeline. 
 \subsection{Javascript Server Back End}
+We sought to build a simple web app which could concisely present the results of algorithm backtesting to the user. In order to do this, we implemented a very basic server using the node.js JavaScript runtime. 
 \subsection{Visualization} 
+In order to visualize the performance of user defined trading algorithms viz. the benchmark, we built a JavaScript front end for our web application. In order to produce detailed and informative plots, we utilized the Highcharts and Highstock charting libraries.
+\\
+The schematic in Figure 2. shows an outline of the system design.
+\begin{figure*}
+  \includegraphics[width=\textwidth,height=10cm]{Figure2}
+  \caption{Schematic depicting the overall system organization}
+\end{figure*}
 
 
 \section{Algorithm (you can change this section name)} 
